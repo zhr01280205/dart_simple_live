@@ -9,7 +9,7 @@ on:
 jobs:
   # 打包Android、iOS、Mac
   build-mac-ios-android:
-    runs-on: macos-15
+    runs-on: macos-latest
 
     permissions:
       contents: write
