@@ -72,7 +72,9 @@ jobs:
       - name: Build APK
         run: |
           cd simple_live_app
-          flutter build apk --release --split-per-abi --no-sign
+          # 🔥 关键：删除残留的签名配置，强制跳过安卓签名校验
+          rm -f android/key.properties
+          flutter build apk --release --split-per-abi
 
       #上传Artifacts
       - name: Upload APK to Artifacts
