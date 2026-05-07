@@ -67,15 +67,15 @@ jobs:
       # 设置flutter_distributor环境
       - name: Install flutter_distributor
         run: dart pub global activate flutter_distributor
-      # 🔥 修复安卓签名报错：创建空签名配置，骗过构建脚本
-      - name: Create dummy signing config
+      # 就加在这里！
+      - name: Create dummy keystore
         run: |
-          cd simple_live_app
-          mkdir -p android
-          echo "storeFile=" > android/key.properties
-          echo "storePassword=123456" >> android/key.properties
-          echo "keyPassword=123456" >> android/key.properties
-          echo "keyAlias=key" >> android/key.properties
+          cd simple_live_app/android
+          keytool -genkey -v -keystore dummy.keystore -alias dummy -keyalg RSA -keysize 2048 -validity 1 -dname "CN=dummy" -storepass 123456 -keypass 123456
+          echo "storeFile=dummy.keystore" > key.properties
+          echo "storePassword=123456" >> key.properties
+          echo "keyPassword=123456" >> key.properties
+          echo "keyAlias=dummy" >> key.properties
       # 打包APK
       - name: Build APK
         run: |
