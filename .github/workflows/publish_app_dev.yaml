@@ -72,7 +72,7 @@ jobs:
       - name: Build APK
         run: |
           cd simple_live_app
-          flutter build apk --release --split-per-abi
+          flutter build apk --release --split-per-abi --no-sign
 
       #上传Artifacts
       - name: Upload APK to Artifacts
